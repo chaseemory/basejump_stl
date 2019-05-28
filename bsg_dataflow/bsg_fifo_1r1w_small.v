@@ -89,21 +89,4 @@ module bsg_fifo_1r1w_small #( parameter width_p      = -1
    assign ready_lo = ~full;
    assign ready_o = ready_lo;
    assign v_o_tmp = ~empty;
-
-   //synopsys translate_off
-   always_ff @ (posedge clk_i)
-     begin
-        if (ready_THEN_valid_p & full  & v_i    & ~reset_i)
-          $display("%m error: enque full fifo at time %t", $time);
-        if (empty & yumi_i & ~reset_i)
-          $display("%m error: deque empty fifo at time %t", $time);
-     end
-   //synopsys translate_on
-
-/*
-   always_ff @(negedge clk_i)
-     begin
-        $display("%m v_i=%x yumi_i=%x wptr=%b rptr=%b enque=%b full=%d empty=%d ready_o=%d",v_i,yumi_i,wptr_r, rptr_r, enque, full,empty,ready_o);
-     end
- */
 endmodule
